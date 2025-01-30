@@ -5,6 +5,7 @@ import os
 from src.json_worker import JSONWorker
 from src.vacancy_class import Vacancy
 
+
 @pytest.fixture
 def temp_json_file():
     """Создает временный JSON-файл для тестов и удаляет его после"""
@@ -15,10 +16,12 @@ def temp_json_file():
     yield temp_file_path
     os.remove(temp_file_path)
 
+
 @pytest.fixture
 def json_worker(temp_json_file):
     """Создает экземпляр JSONWorker с временным файлом"""
     return JSONWorker(temp_json_file)
+
 
 @pytest.fixture
 def sample_vacancy_json():
@@ -27,8 +30,9 @@ def sample_vacancy_json():
         name="Python Developer",
         url="https://hh.ru/vacancy/123456",
         salary="100000-150000 руб.",
-        address="Москва"
+        address="Москва",
     )
+
 
 def test_create_empty_json_if_not_exists():
     """Проверяет, что при создании JSONWorker файл создается и содержит пустой список"""
@@ -49,6 +53,7 @@ def test_create_empty_json_if_not_exists():
     finally:
         os.remove(temp_file_path)
 
+
 def test_add_vacancy(json_worker, sample_vacancy_json):
     """Проверяет, что вакансия добавляется в JSON-файл"""
     json_worker.add_vacancy(sample_vacancy_json)
@@ -60,6 +65,7 @@ def test_add_vacancy(json_worker, sample_vacancy_json):
     assert data[0]["name"] == "Python Developer"
     assert data[0]["url"] == "https://hh.ru/vacancy/123456"
 
+
 def test_add_duplicate_vacancy(json_worker, sample_vacancy_json):
     """Проверяет, что повторное добавление вакансии не создает дубликаты"""
     json_worker.add_vacancy(sample_vacancy_json)
@@ -70,6 +76,7 @@ def test_add_duplicate_vacancy(json_worker, sample_vacancy_json):
 
     assert len(data) == 1
 
+
 def test_delete_vacancy(json_worker, sample_vacancy_json):
     """Проверяет, что вакансия корректно удаляется из JSON-файла"""
     json_worker.add_vacancy(sample_vacancy_json)
@@ -79,6 +86,7 @@ def test_delete_vacancy(json_worker, sample_vacancy_json):
         data = json.load(file)
 
     assert len(data) == 0
+
 
 def test_delete_nonexistent_vacancy(json_worker, sample_vacancy_json):
     """Проверяет, что удаление несуществующей вакансии не ломает код"""

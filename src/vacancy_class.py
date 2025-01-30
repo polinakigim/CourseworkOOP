@@ -1,36 +1,42 @@
+from typing import List, Dict, Any, Union
+
+
 class Vacancy:
-    __list_vacancies: list = []
+    __list_vacancies: List[Dict[str, Any]] = []
     __slots__ = ("name", "url", "salary", "address")
 
-    def __init__(self, name, url, salary, address):
+    def __init__(
+        self, name: str, url: str, salary: Dict[str, int], address: str
+    ) -> None:
         """
-
-        :type salary: object
+        Класс для представления вакансии.
         """
-        self.name = name
-        self.url = url
-        self.salary = salary
-        self.address = address
+        self.name: str = name
+        self.url: str = url
+        self.salary: Dict[str, int] = salary
+        self.address: str = address
 
-        dict_vacancy = {
+        dict_vacancy: Dict[str, Any] = {
             "name": self.name,
             "url": self.url,
             "salary": self.salary,
-            "address": self.address
+            "address": self.address,
         }
         self.__list_vacancies.append(dict_vacancy)
 
     @classmethod
-    def all_list_vacancies(cls):
-        """Метод для получения всех вакансий"""
+    def all_list_vacancies(cls) -> List[Dict[str, Any]]:
+        """Метод для получения всех вакансий."""
         return cls.__list_vacancies
 
     @classmethod
-    def clear_list(cls):
+    def clear_list(cls) -> None:
+        """Метод для очистки списка вакансий."""
         cls.__list_vacancies = []
 
     @staticmethod
-    def __validate(salary):
+    def __validate(salary: Union[None, str, Dict[str, int]]) -> Dict[str, int]:
+        """Метод валидации зарплаты."""
         if salary is None:
             return {"from": 0, "to": 0}
         if isinstance(salary, str):
@@ -40,22 +46,22 @@ class Vacancy:
             except ValueError:
                 return {"from": 0, "to": 0}
         elif isinstance(salary, dict):
-            from_salary = salary.get('from', 0)
-            to_salary = salary.get('to', 0)
+            from_salary: int = salary.get("from", 0)
+            to_salary: int = salary.get("to", 0)
             return {"from": from_salary, "to": to_salary}
-        else:
-            return {"from": 0, "to": 0}
+        return {"from": 0, "to": 0}
 
     @classmethod
-    def cast_to_object_list(cls, list_vacancies):
-        """Метод добавления вакансий из списка вакансий"""
+    def cast_to_object_list(
+        cls, list_vacancies: List[Dict[str, Any]]
+    ) -> List[Dict[str, Any]]:
+        """Метод добавления вакансий из списка вакансий."""
         for vacancy_data in list_vacancies:
+            salary: Dict[str, int] = cls.__validate(vacancy_data.get("salary"))
 
-            salary = cls.__validate(vacancy_data.get("salary"))
-
-            address = vacancy_data.get("address", "Не указан")
+            address: str = vacancy_data.get("address", "Не указан")
             if isinstance(address, dict):
-                address = address.get("city", "")
+                address = address.get("address", "")
 
             cls(
                 name=vacancy_data.get("name", "Не указан"),
@@ -65,14 +71,19 @@ class Vacancy:
             )
         return cls.__list_vacancies
 
-    def __ge__(self, other):
-        self_salary_to = self.salary.get("to", 0)
-        other_salary_to = other.salary.get("to", 0)
+    def __ge__(self, other: "Vacancy") -> bool:
+        """Метод сравнения вакансий по максимальной зарплате."""
+        self_salary_to: int = self.salary.get("to", 0)
+        other_salary_to: int = other.salary.get("to", 0)
         return self_salary_to >= other_salary_to
 
     @classmethod
-    def filtered_salary(cls, from_salary: int = 0, to_salary: int = float("inf")):
-        """Метод фильтрации вакансий по зарплате (от и до вилка)"""
-        for vacancies in cls.__list_vacancies:
-            if vacancies["salary"].get("from", 0) >= from_salary and vacancies["salary"]["to"] <= to_salary:
-                print(vacancies)
+    def filtered_salary(
+        cls, from_salary: int = 0, to_salary: int = float("inf")
+    ) -> None:
+        """Метод фильтрации вакансий по зарплате (от и до вилка)."""
+        for vacancy in cls.__list_vacancies:
+            salary_from: int = vacancy["salary"].get("from", 0)
+            salary_to: int = vacancy["salary"].get("to", 0)
+            if salary_from >= from_salary and salary_to <= to_salary:
+                print(vacancy)

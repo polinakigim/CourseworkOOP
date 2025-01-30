@@ -7,16 +7,36 @@ def sample_vacancies():
     """Фикстура для тестирования вакансий"""
     Vacancy.clear_list()  # Очищаем перед тестами, чтобы избежать влияния предыдущих тестов
     return [
-        {"name": "Python Developer", "url": "https://example.com/python-dev", "salary": {"from": 120000, "to": 150000}, "address": "Moscow"},
-        {"name": "Data Scientist", "url": "https://example.com/data-scientist", "salary": {"from": 100000, "to": 130000}, "address": "Saint Petersburg"},
-        {"name": "Java Developer", "url": "https://example.com/java-dev", "salary": {"from": 90000, "to": 110000}, "address": "Moscow"},
+        {
+            "name": "Python Developer",
+            "url": "https://example.com/python-dev",
+            "salary": {"from": 120000, "to": 150000},
+            "address": "Moscow",
+        },
+        {
+            "name": "Data Scientist",
+            "url": "https://example.com/data-scientist",
+            "salary": {"from": 100000, "to": 130000},
+            "address": "Saint Petersburg",
+        },
+        {
+            "name": "Java Developer",
+            "url": "https://example.com/java-dev",
+            "salary": {"from": 90000, "to": 110000},
+            "address": "Moscow",
+        },
     ]
 
 
 def test_vacancy_constructor():
     """Проверяем создание экземпляра Vacancy"""
     Vacancy.clear_list()
-    vacancy = Vacancy("Python Developer", "https://example.com/python-dev", {"from": 120000, "to": 150000}, "Moscow")
+    vacancy = Vacancy(
+        "Python Developer",
+        "https://example.com/python-dev",
+        {"from": 120000, "to": 150000},
+        "Moscow",
+    )
 
     assert vacancy.name == "Python Developer"
     assert vacancy.url == "https://example.com/python-dev"
@@ -50,9 +70,15 @@ def test_clear_list(sample_vacancies):
 
 def test_validate_salary():
     """Проверяем статический метод __validate"""
-    assert Vacancy._Vacancy__validate("120000 - 150000") == {"from": 120000, "to": 150000}
+    assert Vacancy._Vacancy__validate("120000 - 150000") == {
+        "from": 120000,
+        "to": 150000,
+    }
     assert Vacancy._Vacancy__validate(None) == {"from": 0, "to": 0}
-    assert Vacancy._Vacancy__validate({"from": 100000, "to": 130000}) == {"from": 100000, "to": 130000}
+    assert Vacancy._Vacancy__validate({"from": 100000, "to": 130000}) == {
+        "from": 100000,
+        "to": 130000,
+    }
     assert Vacancy._Vacancy__validate("invalid salary") == {"from": 0, "to": 0}
 
 
@@ -70,8 +96,18 @@ def test_cast_to_object_list(sample_vacancies):
 def test_ge_operator():
     """Проверяем оператор сравнения >= для вакансий"""
     Vacancy.clear_list()
-    vacancy1 = Vacancy("Python Developer", "https://example.com/python-dev", {"from": 120000, "to": 150000}, "Moscow")
-    vacancy2 = Vacancy("Data Scientist", "https://example.com/data-scientist", {"from": 100000, "to": 130000}, "Saint Petersburg")
+    vacancy1 = Vacancy(
+        "Python Developer",
+        "https://example.com/python-dev",
+        {"from": 120000, "to": 150000},
+        "Moscow",
+    )
+    vacancy2 = Vacancy(
+        "Data Scientist",
+        "https://example.com/data-scientist",
+        {"from": 100000, "to": 130000},
+        "Saint Petersburg",
+    )
 
     assert vacancy1 >= vacancy2
     assert not vacancy2 >= vacancy1

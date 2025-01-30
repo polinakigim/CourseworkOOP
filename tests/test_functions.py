@@ -1,10 +1,8 @@
 import pytest
-from src.functions import (
-    filter_vacancies,
-    get_vacancies_by_salary,
-    get_top_vacancies,
-    print_vacancies,
-)
+from src.functions.func_filter_vacancies import filter_vacancies
+from src.functions.func_get_vacancies_by_salary import get_vacancies_by_salary
+from src.functions.func_get_top_vacancies import get_top_vacancies
+from src.functions.func_print_vacancies import print_vacancies
 
 
 @pytest.fixture

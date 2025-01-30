@@ -3,10 +3,12 @@ import requests
 from unittest.mock import patch, Mock
 from src.hh_api import HH
 
+
 @pytest.fixture
 def hh_parser():
     """Фикстура для создания экземпляра HH"""
     return HH()
+
 
 def test_load_vacancies(hh_parser):
     """Тест загрузки вакансий с API hh.ru"""
@@ -33,5 +35,5 @@ def test_load_vacancies(hh_parser):
         mock_get.assert_called_with(
             "https://api.hh.ru/vacancies",
             headers={"User-Agent": "HH-User-Agent"},
-            params={"text": keyword, "page": 20, "per_page": 100}
+            params={"text": keyword, "page": 20, "per_page": 100},
         )
