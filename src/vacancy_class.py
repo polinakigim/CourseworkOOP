@@ -67,7 +67,7 @@ class Vacancy:
 
     def __ge__(self, other):
         self_salary_to = self.salary.get("to", 0)
-        other_salary_to = other.__salary.get("to", 0)
+        other_salary_to = other.salary.get("to", 0)
         return self_salary_to >= other_salary_to
 
     @classmethod
@@ -76,43 +76,3 @@ class Vacancy:
         for vacancies in cls.__list_vacancies:
             if vacancies["salary"].get("from", 0) >= from_salary and vacancies["salary"]["to"] <= to_salary:
                 print(vacancies)
-
-
-if __name__ == "__main__":
-    Vacancy.clear_list()
-vacancy_data_list = [
-    {
-        "name": "Frontend Developer",
-        "url": "https://hh.ru/vacancy/111222",
-        "salary": "80000 - 120000",
-        "address": "Saint Petersburg"
-    },
-    {
-        "name": "Data Scientist",
-        "url": "https://hh.ru/vacancy/333444",
-        "salary": "120000 - 180000",
-        "address": "Novosibirsk"
-    },
-    {
-        "name": "QA Engineer",
-        "url": "https://hh.ru/vacancy/555666",
-        "salary": "60000 - 90000",
-        "address": "Vladivostok"
-    },
-    {
-        "name": "Project Manager",
-        "url": "https://hh.ru/vacancy/777888",
-        "salary": "110000 - 160000",
-        "address": "Moscow"
-    },
-    {
-        "name": "DevOps Engineer",
-        "url": "https://hh.ru/vacancy/999000",
-        "salary": "130000 - 190000",
-        "address": "Yekaterinburg"
-    }
-]
-
-Vacancy.cast_to_object_list(vacancy_data_list)
-Vacancy.filtered_salary(0, 140000)
-print(Vacancy.all_list_vacancies())

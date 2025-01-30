@@ -7,6 +7,9 @@ authors = ["polinakigim <polinakigim@gmail.com>"]
 [tool.poetry.dependencies]
 python = "^3.10"
 requests = "^2.32.3"
+pytest = "^8.3.4"
+pytest-mock = "^3.14.0"
+pytest-cov = "^6.0.0"
 
 [tool.poetry.dev-dependencies]
 
