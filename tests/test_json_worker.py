@@ -1,7 +1,9 @@
-import pytest
 import json
-import tempfile
 import os
+import tempfile
+
+import pytest
+
 from src.json_worker import JSONWorker
 from src.vacancy_class import Vacancy
 
@@ -40,7 +42,6 @@ def test_create_empty_json_if_not_exists():
         temp_file_path = temp_file.name
 
     try:
-        worker = JSONWorker(temp_file_path)
 
         if os.stat(temp_file_path).st_size == 0:
             with open(temp_file_path, "w", encoding="utf-8") as file:

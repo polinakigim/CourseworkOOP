@@ -1,4 +1,4 @@
-from typing import List, Dict, Any
+from typing import Any, Dict, List
 
 
 def print_vacancies(vacancies: List[Dict[str, Any]]) -> None:

@@ -1,8 +1,9 @@
-from typing import List, Dict, Any
-from src.abstract_classes import JSONWorkerABC
-from src.vacancy_class import Vacancy
 import json
 import os
+from typing import Any, Dict, List
+
+from src.abstract_classes import JSONWorkerABC
+from src.vacancy_class import Vacancy
 
 
 class JSONWorker(JSONWorkerABC):

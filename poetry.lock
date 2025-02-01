@@ -101,6 +101,18 @@ optional = false
 python-versions = ">=3.7"
 
 [[package]]
+name = "isort"
+version = "6.0.0"
+description = "A Python utility / library to sort Python imports."
+category = "main"
+optional = false
+python-versions = ">=3.9.0"
+
+[package.extras]
+colors = ["colorama"]
+plugins = ["setuptools"]
+
+[[package]]
 name = "mypy-extensions"
 version = "1.0.0"
 description = "Type system extensions for programs checked with the mypy type checker."
@@ -248,7 +260,7 @@ zstd = ["zstandard (>=0.18.0)"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "f9006f897e4c7a8a698c80519c041ae1456752a25ebf433bdd6d9a3e4923588c"
+content-hash = "5f6ad333b2563fc31ff0b8107f6b7f1d4f2f92274bd9a35d6ccebdc78c806a22"
 
 [metadata.files]
 black = []
@@ -260,6 +272,7 @@ coverage = []
 exceptiongroup = []
 idna = []
 iniconfig = []
+isort = []
 mypy-extensions = []
 packaging = []
 pathspec = []

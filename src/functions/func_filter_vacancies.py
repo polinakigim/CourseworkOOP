@@ -1,4 +1,4 @@
-from typing import List, Dict, Any
+from typing import Any, Dict, List
 
 
 def filter_vacancies(
@@ -8,15 +8,10 @@ def filter_vacancies(
     filtered_vacancies: List[Dict[str, Any]] = []
 
     for vacancy in vacancies_list:
+        name = str(vacancy.get("name", ""))
+        address = str(vacancy.get("address", ""))
+
         for word in filter_words:
-            name: str = vacancy.get("name", "")
-            address: str = vacancy.get("address", "")
-
-            if not isinstance(name, str):
-                name = ""
-            if not isinstance(address, str):
-                address = ""
-
             if word.lower() in name.lower() or word.lower() in address.lower():
                 filtered_vacancies.append(vacancy)
                 break

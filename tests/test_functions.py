@@ -1,7 +1,8 @@
 import pytest
+
 from src.functions.func_filter_vacancies import filter_vacancies
-from src.functions.func_get_vacancies_by_salary import get_vacancies_by_salary
 from src.functions.func_get_top_vacancies import get_top_vacancies
+from src.functions.func_get_vacancies_by_salary import get_vacancies_by_salary
 from src.functions.func_print_vacancies import print_vacancies
 
 
